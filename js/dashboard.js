@@ -21,6 +21,15 @@ let dashboardData = {
 
 
 
+// Stores current transaction type
+
+let transactionType = "";
+
+
+
+
+
+
 /* ===========================
    UPDATE DASHBOARD VALUES
 =========================== */
@@ -93,6 +102,105 @@ function formatMoney(amount){
 
 
 
-// Load dashboard
+
+
+/* ===========================
+   TRANSACTION MODAL
+=========================== */
+
+
+const incomeBtn = document.querySelector("#incomeBtn");
+
+const expenseBtn = document.querySelector("#expenseBtn");
+
+const modal = document.querySelector("#transactionModal");
+
+const modalTitle = document.querySelector("#modalTitle");
+
+const closeModal = document.querySelector("#closeModal");
+
+
+
+
+
+// Open Income Modal
+
+if(incomeBtn){
+
+
+    incomeBtn.addEventListener("click",()=>{
+
+
+        transactionType = "income";
+
+
+        modalTitle.innerText = "Add Income";
+
+
+        modal.classList.add("active");
+
+
+    });
+
+
+}
+
+
+
+
+
+
+// Open Expense Modal
+
+if(expenseBtn){
+
+
+    expenseBtn.addEventListener("click",()=>{
+
+
+        transactionType = "expense";
+
+
+        modalTitle.innerText = "Add Expense";
+
+
+        modal.classList.add("active");
+
+
+    });
+
+
+}
+
+
+
+
+
+
+// Close Modal
+
+if(closeModal){
+
+
+    closeModal.addEventListener("click",()=>{
+
+
+        modal.classList.remove("active");
+
+
+    });
+
+
+}
+
+
+
+
+
+
+/* ===========================
+   LOAD DASHBOARD
+=========================== */
+
 
 updateDashboard();
