@@ -1,1 +1,158 @@
+/* ===========================
+   COMPONENTS
+=========================== */
 
+
+/* Cards Enhancement */
+
+.card {
+
+    position: relative;
+    overflow: hidden;
+
+}
+
+
+.card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: var(--primary);
+
+}
+
+
+
+
+/* Card Variations */
+
+.card:nth-child(2)::before {
+
+    background: var(--success);
+
+}
+
+
+.card:nth-child(3)::before {
+
+    background: var(--danger);
+
+}
+
+
+.card:nth-child(4)::before {
+
+    background: var(--warning);
+
+}
+
+
+
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+
+button {
+
+    border: none;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+}
+
+
+
+button:hover {
+
+    transform: scale(1.05);
+
+}
+
+
+
+/* ===========================
+   SIDEBAR ACTIVE STATE
+=========================== */
+
+
+.sidebar li:first-child {
+
+    background: #EEF2FF;
+
+    color: var(--primary);
+
+    font-weight: 600;
+
+}
+
+
+
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+
+::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+
+
+::-webkit-scrollbar-track {
+
+    background: var(--background);
+
+}
+
+
+
+::-webkit-scrollbar-thumb {
+
+    background: #CBD5E1;
+
+    border-radius: 20px;
+
+}
+
+
+
+
+/* ===========================
+   TEXT UTILITIES
+=========================== */
+
+
+.text-success {
+
+    color: var(--success);
+
+}
+
+
+.text-danger {
+
+    color: var(--danger);
+
+}
+
+
+.text-warning {
+
+    color: var(--warning);
+
+}
