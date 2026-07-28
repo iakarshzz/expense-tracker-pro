@@ -3,81 +3,97 @@
 =========================== */
 
 
-// Default dashboard data
-
-let dashboardData = {
-
-    balance: 0,
-
-    income: 0,
-
-    expense: 0,
-
-    savings: 0
-
-};
-
-
-
-
-
-// Stores current transaction type
-
-let transactionType = "";
-
-
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
 
 
 
 
 /* ===========================
-   UPDATE DASHBOARD VALUES
+   DASHBOARD UPDATE
 =========================== */
 
 
 function updateDashboard(){
 
 
-    const balance = document.querySelector(".balance");
+    let income = 0;
 
-    const income = document.querySelector(".income");
-
-    const expense = document.querySelector(".expense");
-
-    const savings = document.querySelector(".savings");
+    let expense = 0;
 
 
 
-    if(balance){
+    transactions.forEach(transaction=>{
 
-        balance.innerText = formatMoney(dashboardData.balance);
+
+        if(transaction.type === "income"){
+
+            income += transaction.amount;
+
+        }
+
+
+        if(transaction.type === "expense"){
+
+            expense += transaction.amount;
+
+        }
+
+
+    });
+
+
+
+
+
+    let balance = income - expense;
+
+
+
+
+
+    const balanceElement = document.querySelector(".balance");
+
+    const incomeElement = document.querySelector(".income");
+
+    const expenseElement = document.querySelector(".expense");
+
+    const savingsElement = document.querySelector(".savings");
+
+
+
+
+
+    if(balanceElement){
+
+        balanceElement.innerText = formatMoney(balance);
 
     }
 
 
 
-    if(income){
+    if(incomeElement){
 
-        income.innerText = formatMoney(dashboardData.income);
-
-    }
-
-
-
-    if(expense){
-
-        expense.innerText = formatMoney(dashboardData.expense);
+        incomeElement.innerText = formatMoney(income);
 
     }
 
 
 
-    if(savings){
+    if(expenseElement){
 
-        savings.innerText = formatMoney(dashboardData.savings);
+        expenseElement.innerText = formatMoney(expense);
 
     }
+
+
+
+    if(savingsElement){
+
+        savingsElement.innerText = formatMoney(balance);
+
+    }
+
 
 
 }
@@ -89,17 +105,18 @@ function updateDashboard(){
 
 
 /* ===========================
-   MONEY FORMATTER
+   MONEY FORMAT
 =========================== */
 
 
 function formatMoney(amount){
 
 
-    return getCurrencySymbol() + amount.toLocaleString();
+    return getCurrencySymbol() + amount.toLocaleString("en-US");
 
 
 }
+
 
 
 
@@ -108,64 +125,44 @@ function formatMoney(amount){
 
 
 /* ===========================
-   TRANSACTION MODAL
+   MODAL SYSTEM
 =========================== */
 
 
-const incomeBtn = document.querySelector("#incomeBtn");
-
-const expenseBtn = document.querySelector("#expenseBtn");
+const transactionBtn = document.querySelector("#transactionBtn");
 
 const modal = document.querySelector("#transactionModal");
 
-const modalTitle = document.querySelector("#modalTitle");
-
 const closeModal = document.querySelector("#closeModal");
 
+const saveTransaction = document.querySelector("#saveTransaction");
 
 
 
 
-// Open Income Modal
 
-if(incomeBtn){
+const amountInput = document.querySelector("#amountInput");
 
+const typeInput = document.querySelector("#typeInput");
 
-    incomeBtn.addEventListener("click",()=>{
+const categoryInput = document.querySelector("#categoryInput");
 
+const noteInput = document.querySelector("#noteInput");
 
-        transactionType = "income";
-
-
-        modalTitle.innerText = "Add Income";
-
-
-        modal.classList.add("active");
-
-
-    });
-
-
-}
+const dateInput = document.querySelector("#dateInput");
 
 
 
 
 
 
-
-// Open Expense Modal
-
-if(expenseBtn){
+// Open Modal
 
 
-    expenseBtn.addEventListener("click",()=>{
+if(transactionBtn){
 
 
-        transactionType = "expense";
-
-
-        modalTitle.innerText = "Add Expense";
+    transactionBtn.addEventListener("click",()=>{
 
 
         modal.classList.add("active");
@@ -175,7 +172,6 @@ if(expenseBtn){
 
 
 }
-
 
 
 
@@ -183,6 +179,7 @@ if(expenseBtn){
 
 
 // Close Modal
+
 
 if(closeModal){
 
@@ -209,12 +206,6 @@ if(closeModal){
 =========================== */
 
 
-const saveTransaction = document.querySelector("#saveTransaction");
-
-const amountInput = document.querySelector("#amountInput");
-
-
-
 if(saveTransaction){
 
 
@@ -225,10 +216,10 @@ if(saveTransaction){
 
 
 
-        if(!amount || amount <= 0){
+        if(!amount || !typeInput.value){
 
 
-            alert("Please enter a valid amount");
+            alert("Please enter amount and type");
 
 
             return;
@@ -240,38 +231,49 @@ if(saveTransaction){
 
 
 
-        if(transactionType === "income"){
+
+        let transaction = {
 
 
-            dashboardData.income += amount;
+            id: Date.now(),
 
 
-        }
+            amount: amount,
 
 
+            type: typeInput.value,
 
 
-        if(transactionType === "expense"){
+            category: categoryInput.value,
 
 
-            dashboardData.expense += amount;
+            note: noteInput.value,
 
 
-        }
+            date: dateInput.value || new Date().toISOString().split("T")[0]
 
 
-
-
-
-
-        dashboardData.balance =
-        dashboardData.income - dashboardData.expense;
+        };
 
 
 
 
-        dashboardData.savings =
-        dashboardData.balance;
+
+
+        transactions.push(transaction);
+
+
+
+
+
+
+        localStorage.setItem(
+
+            "transactions",
+
+            JSON.stringify(transactions)
+
+        );
 
 
 
@@ -284,7 +286,6 @@ if(saveTransaction){
 
 
 
-        // Close modal
 
         modal.classList.remove("active");
 
@@ -292,9 +293,19 @@ if(saveTransaction){
 
 
 
-        // Clear input
+
+        // Clear form
+
 
         amountInput.value = "";
+
+        typeInput.value = "";
+
+        categoryInput.value = "";
+
+        noteInput.value = "";
+
+        dateInput.value = "";
 
 
 
@@ -309,9 +320,6 @@ if(saveTransaction){
 
 
 
-/* ===========================
-   LOAD DASHBOARD
-=========================== */
-
+// Initial Load
 
 updateDashboard();
