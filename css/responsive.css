@@ -56,7 +56,10 @@
 
 
 
-    /* Show hamburger button */
+    /* ===========================
+       HAMBURGER BUTTON
+    =========================== */
+
 
     .menu-btn {
 
@@ -67,7 +70,10 @@
 
 
 
-    /* Sidebar Drawer */
+    /* ===========================
+       MOBILE SIDEBAR DRAWER
+    =========================== */
+
 
     .sidebar {
 
@@ -78,35 +84,42 @@
 
         left: 0;
 
+
         width: 260px;
 
         height: 100vh;
 
-        z-index: 1000;
+
+        z-index: 9999;
+
+
+        background: var(--surface);
+
 
         transform: translateX(-100%);
 
-        transition: var(--transition);
+
+        transition: transform 0.3s ease;
+
 
         border-right: 1px solid var(--border);
 
+        padding: var(--space-xl);
+
     }
+
 
 
 
     .sidebar.active {
 
+
         transform: translateX(0);
 
-    }
-
-
-
-    .logo {
-
-        margin-bottom: var(--space-lg);
 
     }
+
+
 
 
 
@@ -115,19 +128,29 @@
 
         flex-direction: column;
 
-        overflow: visible;
+        gap: var(--space-md);
+
 
     }
+
 
 
 
     .sidebar li {
 
+
         white-space: nowrap;
+
 
     }
 
 
+
+
+
+    /* ===========================
+       MAIN CONTENT
+    =========================== */
 
 
     .main {
@@ -135,13 +158,22 @@
 
         margin-left: 0;
 
+
         width: 100%;
 
+
         padding: var(--space-md);
+
 
     }
 
 
+
+
+
+    /* ===========================
+       NAVBAR
+    =========================== */
 
 
     .navbar {
@@ -149,7 +181,9 @@
 
         flex-direction: row;
 
+
         align-items: center;
+
 
     }
 
@@ -161,15 +195,23 @@
 
         font-size: 22px;
 
+
     }
 
 
+
+
+
+    /* ===========================
+       DASHBOARD
+    =========================== */
 
 
     .dashboard {
 
 
         grid-template-columns: 1fr;
+
 
     }
 
@@ -193,7 +235,9 @@
 
         padding: var(--space-lg);
 
+
     }
+
 
 
 
@@ -202,7 +246,9 @@
 
         font-size: 24px;
 
+
     }
+
 
 
 
@@ -212,7 +258,9 @@
 
         width: 40px;
 
+
         height: 40px;
+
 
     }
 
