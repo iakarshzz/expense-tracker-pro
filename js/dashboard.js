@@ -30,6 +30,7 @@ let transactionType = "";
 
 
 
+
 /* ===========================
    UPDATE DASHBOARD VALUES
 =========================== */
@@ -80,6 +81,8 @@ function updateDashboard(){
 
 
 }
+
+
 
 
 
@@ -150,6 +153,7 @@ if(incomeBtn){
 
 
 
+
 // Open Expense Modal
 
 if(expenseBtn){
@@ -177,6 +181,7 @@ if(expenseBtn){
 
 
 
+
 // Close Modal
 
 if(closeModal){
@@ -192,6 +197,112 @@ if(closeModal){
 
 
 }
+
+
+
+
+
+
+
+/* ===========================
+   SAVE TRANSACTION
+=========================== */
+
+
+const saveTransaction = document.querySelector("#saveTransaction");
+
+const amountInput = document.querySelector("#amountInput");
+
+
+
+if(saveTransaction){
+
+
+    saveTransaction.addEventListener("click",()=>{
+
+
+        let amount = Number(amountInput.value);
+
+
+
+        if(!amount || amount <= 0){
+
+
+            alert("Please enter a valid amount");
+
+
+            return;
+
+
+        }
+
+
+
+
+
+        if(transactionType === "income"){
+
+
+            dashboardData.income += amount;
+
+
+        }
+
+
+
+
+        if(transactionType === "expense"){
+
+
+            dashboardData.expense += amount;
+
+
+        }
+
+
+
+
+
+
+        dashboardData.balance =
+        dashboardData.income - dashboardData.expense;
+
+
+
+
+        dashboardData.savings =
+        dashboardData.balance;
+
+
+
+
+
+
+        updateDashboard();
+
+
+
+
+
+        // Close modal
+
+        modal.classList.remove("active");
+
+
+
+
+
+        // Clear input
+
+        amountInput.value = "";
+
+
+
+    });
+
+
+}
+
 
 
 
