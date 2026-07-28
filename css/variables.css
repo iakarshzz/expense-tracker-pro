@@ -1,1 +1,48 @@
+:root {
 
+    /* Colors */
+    --primary: #4F46E5;
+    --primary-dark: #3730A3;
+
+    --success: #22C55E;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+
+    --background: #F8FAFC;
+    --surface: #FFFFFF;
+
+    --text-primary: #0F172A;
+    --text-secondary: #64748B;
+
+    --border: #E2E8F0;
+
+
+    /* Typography */
+    --font-family: "Inter", sans-serif;
+
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+
+
+    /* Animation */
+    --transition: 250ms ease;
+
+}
