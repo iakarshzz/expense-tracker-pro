@@ -1,1 +1,219 @@
+/* ===========================
+   MAIN APP LAYOUT
+=========================== */
 
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+
+.sidebar {
+
+    width: 260px;
+    background: var(--surface);
+
+    padding: var(--space-xl);
+
+    border-right: 1px solid var(--border);
+
+    position: fixed;
+    height: 100vh;
+
+}
+
+
+
+.logo {
+
+    font-size: 22px;
+    font-weight: 700;
+
+    color: var(--primary);
+
+    margin-bottom: var(--space-2xl);
+
+}
+
+
+
+
+.sidebar ul {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-md);
+
+}
+
+
+
+
+.sidebar li {
+
+    padding: 12px 16px;
+
+    border-radius: var(--radius-md);
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+}
+
+
+
+
+.sidebar li:hover {
+
+    background: #EEF2FF;
+
+    color: var(--primary);
+
+}
+
+
+
+
+
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+
+.main {
+
+    margin-left: 260px;
+
+    width: calc(100% - 260px);
+
+    padding: var(--space-xl);
+
+}
+
+
+
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+
+.navbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: var(--space-xl);
+
+}
+
+
+
+.navbar h1 {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+}
+
+
+
+.theme-btn {
+
+    border: none;
+
+    background: var(--surface);
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+
+
+
+/* ===========================
+   DASHBOARD CARDS
+=========================== */
+
+
+.dashboard {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: var(--space-lg);
+
+}
+
+
+
+
+.card {
+
+    background: var(--surface);
+
+    padding: var(--space-xl);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition: var(--transition);
+
+}
+
+
+
+.card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-md);
+
+}
+
+
+
+.card p {
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+.card h2 {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+}
