@@ -40,6 +40,14 @@
 @media (max-width: 768px) {
 
 
+    body {
+
+        overflow-x: hidden;
+
+    }
+
+
+
     .app {
 
         display: block;
@@ -48,20 +56,47 @@
 
 
 
-    /* Sidebar becomes top menu */
+    /* Show hamburger button */
+
+    .menu-btn {
+
+        display: flex;
+
+    }
+
+
+
+
+    /* Sidebar Drawer */
 
     .sidebar {
 
 
-        position: relative;
+        position: fixed;
 
-        width: 100%;
+        top: 0;
 
-        height: auto;
+        left: 0;
 
-        border-right: none;
+        width: 260px;
 
-        border-bottom: 1px solid var(--border);
+        height: 100vh;
+
+        z-index: 1000;
+
+        transform: translateX(-100%);
+
+        transition: var(--transition);
+
+        border-right: 1px solid var(--border);
+
+    }
+
+
+
+    .sidebar.active {
+
+        transform: translateX(0);
 
     }
 
@@ -78,9 +113,9 @@
     .sidebar ul {
 
 
-        flex-direction: row;
+        flex-direction: column;
 
-        overflow-x: auto;
+        overflow: visible;
 
     }
 
@@ -108,12 +143,16 @@
 
 
 
-    .dashboard {
+
+    .navbar {
 
 
-        grid-template-columns: 1fr;
+        flex-direction: row;
+
+        align-items: center;
 
     }
+
 
 
 
@@ -126,7 +165,17 @@
 
 
 
+
+    .dashboard {
+
+
+        grid-template-columns: 1fr;
+
+    }
+
+
 }
+
 
 
 
@@ -157,14 +206,13 @@
 
 
 
-    .navbar {
+    .theme-btn,
+    .menu-btn {
 
 
-        flex-direction: column;
+        width: 40px;
 
-        align-items: flex-start;
-
-        gap: 15px;
+        height: 40px;
 
     }
 
