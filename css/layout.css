@@ -152,6 +152,38 @@
 }
 
 
+/* ===========================
+   MOBILE MENU BUTTON
+=========================== */
+
+
+.menu-btn {
+
+    display: none;
+
+    border: none;
+
+    background: var(--surface);
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    box-shadow: var(--shadow-sm);
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
 
 
 /* ===========================
