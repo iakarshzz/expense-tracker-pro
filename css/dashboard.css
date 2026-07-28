@@ -1,1 +1,192 @@
+/* ===========================
+   DASHBOARD HEADER
+=========================== */
 
+
+.welcome-section {
+
+    margin-bottom: var(--space-xl);
+
+}
+
+
+.welcome-section h2 {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.welcome-section p {
+
+    color: var(--text-secondary);
+
+}
+
+
+
+
+
+/* ===========================
+   MAIN BALANCE CARD
+=========================== */
+
+
+.balance-card {
+
+    background: var(--primary);
+
+    color: white;
+
+    padding: var(--space-xl);
+
+    border-radius: var(--radius-lg);
+
+    margin-bottom: var(--space-xl);
+
+    box-shadow: var(--shadow-md);
+
+}
+
+
+
+.balance-card p {
+
+    opacity: 0.8;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+.balance-card h1 {
+
+    font-size: 42px;
+
+    margin-bottom: var(--space-lg);
+
+}
+
+
+
+
+.balance-actions {
+
+    display: flex;
+
+    gap: var(--space-md);
+
+}
+
+
+
+
+.balance-actions button {
+
+
+    padding: 12px 20px;
+
+    border-radius: var(--radius-md);
+
+    border: none;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+
+
+
+
+/* ===========================
+   QUICK ACTIONS
+=========================== */
+
+
+.quick-actions {
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    gap: var(--space-lg);
+
+    margin-bottom: var(--space-xl);
+
+}
+
+
+
+.action-card {
+
+    background: var(--surface);
+
+    padding: var(--space-lg);
+
+    border-radius: var(--radius-lg);
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+
+
+.action-card:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
+
+
+
+/* ===========================
+   TRANSACTION SECTION
+=========================== */
+
+
+.transactions {
+
+    background: var(--surface);
+
+    padding: var(--space-xl);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+
+
+.transactions h3 {
+
+    margin-bottom: var(--space-lg);
+
+}
+
+
+
+.empty-state {
+
+    text-align: center;
+
+    color: var(--text-secondary);
+
+    padding: 30px;
+
+}
