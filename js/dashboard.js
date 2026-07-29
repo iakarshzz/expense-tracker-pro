@@ -1,325 +1,549 @@
 /* ===========================
-   DASHBOARD FUNCTIONALITY
+   EXPENSE TRACKER PRO
+   DASHBOARD.JS
 =========================== */
 
-
-let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-
-
-
-
+let transactions =
+JSON.parse(localStorage.getItem("transactions")) || [];
 
 /* ===========================
-   DASHBOARD UPDATE
+   DOM ELEMENTS
 =========================== */
 
+const transactionBtn =
+document.querySelector("#transactionBtn");
 
-function updateDashboard(){
+const modal =
+document.querySelector("#transactionModal");
 
+const closeModal =
+document.querySelector("#closeModal");
 
-    let income = 0;
+const cancelBtn =
+document.querySelector("#cancelTransaction");
 
-    let expense = 0;
+const saveTransaction =
+document.querySelector("#saveTransaction");
 
+const amountInput =
+document.querySelector("#amountInput");
 
+const categoryInput =
+document.querySelector("#categoryInput");
 
-    transactions.forEach(transaction=>{
+const dateInput =
+document.querySelector("#dateInput");
 
+const incomeRadio =
+document.querySelector("#incomeType");
 
-        if(transaction.type === "income"){
+const expenseRadio =
+document.querySelector("#expenseType");
 
-            income += transaction.amount;
+const transactionContainer =
+document.querySelector(".transactions");
 
-        }
+/* ===========================
+   CATEGORY DATA
+=========================== */
 
+const incomeCategories = [
 
-        if(transaction.type === "expense"){
+"💼 Salary",
+"💻 Freelance",
+"🤝 Collaboration",
+"🏢 Business",
+"📈 Investment",
+"🎁 Gift",
+"💸 Bonus",
+"🏦 Interest"
 
-            expense += transaction.amount;
+];
 
-        }
+const expenseCategories = [
 
+"🍔 Food",
+"✈️ Travel",
+"🛍 Shopping",
+"🏠 Rent",
+"⚡ Bills",
+"🏥 Medical",
+"📚 Education",
+"🎮 Entertainment",
+"⛽ Fuel",
+"📦 Other"
 
-    });
+];
 
+/* ===========================
+   OPEN MODAL
+=========================== */
 
+if(transactionBtn){
 
+transactionBtn.addEventListener("click",()=>{
 
+modal.classList.add("active");
 
-    let balance = income - expense;
+dateInput.value =
+new Date().toISOString().split("T")[0];
 
-
-
-
-
-    const balanceElement = document.querySelector(".balance");
-
-    const incomeElement = document.querySelector(".income");
-
-    const expenseElement = document.querySelector(".expense");
-
-    const savingsElement = document.querySelector(".savings");
-
-
-
-
-
-    if(balanceElement){
-
-        balanceElement.innerText = formatMoney(balance);
-
-    }
-
-
-
-    if(incomeElement){
-
-        incomeElement.innerText = formatMoney(income);
-
-    }
-
-
-
-    if(expenseElement){
-
-        expenseElement.innerText = formatMoney(expense);
-
-    }
-
-
-
-    if(savingsElement){
-
-        savingsElement.innerText = formatMoney(balance);
-
-    }
-
-
+});
 
 }
 
+/* ===========================
+   CLOSE MODAL
+=========================== */
 
+function closeTransactionModal(){
 
+modal.classList.remove("active");
 
+amountInput.value="";
 
+categoryInput.innerHTML=
+'<option value="">Select Category</option>';
 
+incomeRadio.checked=false;
+
+expenseRadio.checked=false;
+
+dateInput.value="";
+
+}
+
+if(closeModal){
+
+closeModal.addEventListener(
+
+"click",
+
+closeTransactionModal
+
+);
+
+}
+
+if(cancelBtn){
+
+cancelBtn.addEventListener(
+
+"click",
+
+closeTransactionModal
+
+);
+
+}
+/* ===========================
+   TYPE & CATEGORY
+=========================== */
+
+function loadCategories(type){
+
+categoryInput.innerHTML =
+'<option value="">Select Category</option>';
+
+let categories = [];
+
+if(type === "income"){
+
+categories = incomeCategories;
+
+}else{
+
+categories = expenseCategories;
+
+}
+
+categories.forEach(category=>{
+
+const option =
+document.createElement("option");
+
+option.value =
+category.replace(/^[^\w]+/, "").trim();
+
+option.textContent =
+category;
+
+categoryInput.appendChild(option);
+
+});
+
+}
+
+if(incomeRadio){
+
+incomeRadio.addEventListener("change",()=>{
+
+loadCategories("income");
+
+});
+
+}
+
+if(expenseRadio){
+
+expenseRadio.addEventListener("change",()=>{
+
+loadCategories("expense");
+
+});
+
+}
 
 /* ===========================
    MONEY FORMAT
 =========================== */
 
-
 function formatMoney(amount){
 
-
-    return getCurrencySymbol() + amount.toLocaleString("en-US");
-
+return getCurrencySymbol() +
+amount.toLocaleString("en-US");
 
 }
-
-
-
-
-
-
-
 
 /* ===========================
-   MODAL SYSTEM
+   DASHBOARD UPDATE
 =========================== */
 
+function updateDashboard(){
 
-const transactionBtn = document.querySelector("#transactionBtn");
+let income = 0;
 
-const modal = document.querySelector("#transactionModal");
+let expense = 0;
 
-const closeModal = document.querySelector("#closeModal");
+transactions.forEach(transaction=>{
 
-const saveTransaction = document.querySelector("#saveTransaction");
+if(transaction.type==="income"){
 
+income += transaction.amount;
 
+}else{
 
-
-
-const amountInput = document.querySelector("#amountInput");
-
-const typeInput = document.querySelector("#typeInput");
-
-const categoryInput = document.querySelector("#categoryInput");
-
-const noteInput = document.querySelector("#noteInput");
-
-const dateInput = document.querySelector("#dateInput");
-
-
-
-
-
-
-// Open Modal
-
-
-if(transactionBtn){
-
-
-    transactionBtn.addEventListener("click",()=>{
-
-
-        modal.classList.add("active");
-
-
-    });
-
+expense += transaction.amount;
 
 }
 
+});
 
+const balance = income - expense;
 
+document.querySelectorAll(".balance")
+.forEach(el=>{
 
+el.innerText =
+formatMoney(balance);
 
+});
 
-// Close Modal
+document.querySelectorAll(".income")
+.forEach(el=>{
 
+el.innerText =
+formatMoney(income);
 
-if(closeModal){
+});
 
+document.querySelectorAll(".expense")
+.forEach(el=>{
 
-    closeModal.addEventListener("click",()=>{
+el.innerText =
+formatMoney(expense);
 
+});
 
-        modal.classList.remove("active");
+document.querySelectorAll(".savings")
+.forEach(el=>{
 
+el.innerText =
+formatMoney(balance);
 
-    });
+});
 
+renderTransactions();
 
 }
-
-
-
-
-
-
-
 /* ===========================
    SAVE TRANSACTION
 =========================== */
 
-
 if(saveTransaction){
 
+saveTransaction.addEventListener("click",()=>{
 
-    saveTransaction.addEventListener("click",()=>{
+const amount =
+Number(amountInput.value);
 
+let type = "";
 
-        let amount = Number(amountInput.value);
+if(incomeRadio.checked){
 
-
-
-        if(!amount || !typeInput.value){
-
-
-            alert("Please enter amount and type");
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-        let transaction = {
-
-
-            id: Date.now(),
-
-
-            amount: amount,
-
-
-            type: typeInput.value,
-
-
-            category: categoryInput.value,
-
-
-            note: noteInput.value,
-
-
-            date: dateInput.value || new Date().toISOString().split("T")[0]
-
-
-        };
-
-
-
-
-
-
-        transactions.push(transaction);
-
-
-
-
-
-
-        localStorage.setItem(
-
-            "transactions",
-
-            JSON.stringify(transactions)
-
-        );
-
-
-
-
-
-
-        updateDashboard();
-
-
-
-
-
-
-        modal.classList.remove("active");
-
-
-
-
-
-
-        // Clear form
-
-
-        amountInput.value = "";
-
-        typeInput.value = "";
-
-        categoryInput.value = "";
-
-        noteInput.value = "";
-
-        dateInput.value = "";
-
-
-
-    });
-
+type = "income";
 
 }
 
+if(expenseRadio.checked){
 
+type = "expense";
 
+}
 
+const category =
+categoryInput.value;
 
+const date =
+dateInput.value ||
+new Date().toISOString().split("T")[0];
 
+/* Validation */
 
-// Initial Load
+if(amount <= 0){
+
+alert("Please enter a valid amount.");
+
+return;
+
+}
+
+if(type === ""){
+
+alert("Please select transaction type.");
+
+return;
+
+}
+
+if(category === ""){
+
+alert("Please select a category.");
+
+return;
+
+}
+
+/* Create Transaction */
+
+const transaction = {
+
+id: Date.now(),
+
+amount: amount,
+
+type: type,
+
+category: category,
+
+date: date
+
+};
+
+/* Save */
+
+transactions.push(transaction);
+
+localStorage.setItem(
+
+"transactions",
+
+JSON.stringify(transactions)
+
+);
+
+/* Refresh Dashboard */
 
 updateDashboard();
+
+/* Close Modal */
+
+closeTransactionModal();
+
+});
+
+}
+
+/* ===========================
+   DELETE TRANSACTION
+=========================== */
+
+function deleteTransaction(id){
+
+transactions = transactions.filter(
+
+transaction =>
+
+transaction.id !== id
+
+);
+
+localStorage.setItem(
+
+"transactions",
+
+JSON.stringify(transactions)
+
+);
+
+updateDashboard();
+
+}
+/* ===========================
+   RENDER TRANSACTIONS
+=========================== */
+
+function renderTransactions(){
+
+const emptyState =
+document.querySelector(".empty-state");
+
+let oldList =
+document.querySelector(".transaction-list");
+
+if(oldList){
+
+oldList.remove();
+
+}
+
+if(transactions.length === 0){
+
+if(emptyState){
+
+emptyState.style.display = "block";
+
+}
+
+return;
+
+}
+
+if(emptyState){
+
+emptyState.style.display = "none";
+
+}
+
+const list =
+document.createElement("div");
+
+list.className = "transaction-list";
+
+transactions
+.slice()
+.reverse()
+.forEach(transaction=>{
+
+const card =
+document.createElement("div");
+
+card.className =
+"transaction-item";
+
+card.innerHTML = `
+
+<div class="transaction-left">
+
+<h4>${transaction.category}</h4>
+
+<p>
+
+${transaction.type === "income" ? "Income" : "Expense"}
+
+•
+
+${transaction.date}
+
+</p>
+
+</div>
+
+<div class="transaction-right">
+
+<span class="${
+transaction.type === "income"
+? "income-text"
+: "expense-text"
+}">
+
+${transaction.type === "income" ? "+" : "-"}
+
+${formatMoney(transaction.amount)}
+
+</span>
+
+<button
+class="delete-btn"
+data-id="${transaction.id}">
+
+🗑
+
+</button>
+
+</div>
+
+`;
+
+list.appendChild(card);
+
+});
+
+transactionContainer.appendChild(list);
+
+/* Delete Events */
+
+document
+.querySelectorAll(".delete-btn")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const id =
+Number(button.dataset.id);
+
+deleteTransaction(id);
+
+});
+
+});
+
+}
+
+/* ===========================
+   CLOSE MODAL ON OUTSIDE CLICK
+=========================== */
+
+window.addEventListener("click",(event)=>{
+
+if(event.target === modal){
+
+closeTransactionModal();
+
+}
+
+});
+
+/* ===========================
+   ESC KEY SUPPORT
+=========================== */
+
+document.addEventListener("keydown",(event)=>{
+
+if(event.key === "Escape"){
+
+closeTransactionModal();
+
+}
+
+});
+
+/* ===========================
+   INITIAL LOAD
+=========================== */
+
+updateDashboard();
+
+console.log(
+"✅ Expense Tracker Pro Loaded Successfully"
+);
